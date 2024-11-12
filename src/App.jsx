@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { TextField } from '@mui/material'
-import foldImga from './assets/images.png'
+import foldImga from './assets/bmiChart.jpg'
 
 
 function App() {
@@ -28,13 +28,24 @@ function App() {
         setWeight(value)
         setInvalidweight(false)
       }
-    } else {
+    } 
+    
+    else {
       if (name == 'height') {
         setInvalidheight(true)
       } else if (name === 'weight') {
         setInvalidweight(true)
       }
     }
+    
+    if (name == 'height') {
+          setHeight(value)
+          setInvalidheight(false)
+        }
+      else if (name === 'weight') {
+        setWeight(value)
+        setInvalidweight(false)
+      }
   }
 
 
@@ -52,13 +63,13 @@ function App() {
 
       if (balance < 18.5) {
         console.log('your are underweight');
-        setStatus('Your are Underweight')
+        setStatus('You are Underweight')
 
       } else if (balance > 18.5 && balance < 24.9) {
         console.log('normal weight');
         setStatus('Normal Weight')
 
-      } else if (balance > 25 || balance < 29.9) {
+      } else if (balance > 25 && balance < 29.9) {
         console.log('over weight')
         setStatus('Over Weight')
       } else if (balance > 30) {
@@ -88,18 +99,23 @@ function App() {
                 <h1 className='text-success'>BMI Calculator</h1>
 
                 <TextField
+                type='number'
                   name='height'
                   value={height || ""}
                   onChange={(e) => validateInput(e.target)}
                   className='w-80 m-2'
                   id="outlined-basic"
                   label="height(cm)"
-                  variant="outlined" />
+                  variant="outlined"
+                   />
                 {
                   invalidHeight && <p>invalid data</p>
                 }
 
-                <TextField name='weight' value={weight} onChange={(e) => validateInput(e.target)} className='w-80 ' id="outlined-basic" label="weight(kg)" variant="outlined" /><br />
+                <TextField name='weight' type='number' value={weight} onChange={(e) => validateInput(e.target)} className='w-80 ' id="outlined-basic" label="weight(kg)" variant="outlined" /><br />
+                {
+                  invalidWeight && <p>invalid data</p>
+                }
                 <button type='submit' onClick={handlesubmit} className='btn btn-success p-1 m-3'>Calculate BMI</button>
                 <h2 className='text-danger'>Your BMI :{bmi}</h2>
 
